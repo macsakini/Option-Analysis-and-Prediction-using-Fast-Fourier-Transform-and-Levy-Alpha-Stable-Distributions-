@@ -1,0 +1,34 @@
+"0","# Density (I reparametrize it to remove the constraints "
+"0","# on the parameters)"
+"0","library(fBasics)"
+"0","library(stabledist)"
+"0","library(Quandl)"
+"0","library(dplyr)"
+"0","library(tidyr)"
+"0","library(tidyverse)"
+"0","library(data.table)"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"2","data.table 1.14.0 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
+"
+"2","
+Attaching package: ‘data.table’
+
+"
+"2","The following objects are masked from ‘package:xts’:
+
+    first, last
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    transpose
+
+"
+"2","The following objects are masked from ‘package:dplyr’:
+
+    between, first, last
+
+"

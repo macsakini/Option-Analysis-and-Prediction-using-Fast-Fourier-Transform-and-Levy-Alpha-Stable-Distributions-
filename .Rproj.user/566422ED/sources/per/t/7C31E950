@@ -1,0 +1,28 @@
+{
+    "id": "7C31E950",
+    "path": "~/options/djia.Rmd",
+    "project_path": "djia.Rmd",
+    "type": "r_markdown",
+    "hash": "3760563242",
+    "contents": "",
+    "dirty": false,
+    "created": 1627321144519.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "tempName": "Untitled3",
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "23,3",
+        "scrollLine": "23"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1627410309,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1627410310050,
+    "read_only": false,
+    "read_only_alternatives": []
+}

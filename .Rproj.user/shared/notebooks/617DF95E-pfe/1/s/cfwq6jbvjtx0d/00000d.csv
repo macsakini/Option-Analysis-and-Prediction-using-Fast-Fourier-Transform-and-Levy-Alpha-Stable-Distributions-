@@ -1,0 +1,2 @@
+"0","fit <- stableFit(x,alpha=2,beta=1,gamma=1,delta=0,type=c(""mle""),"
+"0","      doplot=TRUE)"

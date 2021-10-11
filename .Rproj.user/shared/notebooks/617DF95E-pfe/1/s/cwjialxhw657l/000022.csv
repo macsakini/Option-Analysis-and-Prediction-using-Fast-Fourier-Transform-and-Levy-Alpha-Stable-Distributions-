@@ -1,0 +1,2 @@
+"0","data %>% "
+"0","  filter(if_all(everything(), ~ !is.na(.x)))"

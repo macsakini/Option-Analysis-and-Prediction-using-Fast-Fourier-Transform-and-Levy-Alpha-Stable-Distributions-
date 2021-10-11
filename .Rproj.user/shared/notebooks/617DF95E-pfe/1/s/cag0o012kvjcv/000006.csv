@@ -1,0 +1,48 @@
+"0","fit"
+"1","
+Title:
+ "
+"1","Stable Parameter Estimation"
+"1"," "
+"1","
+"
+"1","
+Call:
+ "
+"1",".mleStableFit(x = x, alpha = Alpha, beta = Beta, gamma = Gamma, 
+    delta = Delta, doplot = doplot, control = control, trace = trace, 
+    title = title, description = description)"
+"1",""
+"1","
+"
+"1","
+Model:
+ "
+"1",""
+"1","Stable Distribution"
+"1",""
+"1","
+"
+"1","
+Estimated Parameter(s):
+"
+"1","       alpha "
+"1","        beta "
+"1","       gamma "
+"1","       delta "
+"1","
+"
+"1","1.8112561002 "
+"1","0.1691817600 "
+"1","0.0064995270 "
+"1","0.0006297204 "
+"1","
+"
+"1","
+Description:
+ "
+"1","Tue Jul 27 08:47:57 2021 by user: HP"
+"1"," "
+"1","
+
+"

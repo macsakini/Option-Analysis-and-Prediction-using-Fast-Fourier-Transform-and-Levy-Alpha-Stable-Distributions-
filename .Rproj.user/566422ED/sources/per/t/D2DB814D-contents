@@ -1,0 +1,53 @@
+from numpy.fft import fft
+import pandas as pd
+from scipy.stats import levy_stable
+import math
+import numpy as np
+from numpy.fft import *
+from scipy import stats # For Calibration
+from numpy.fft import fft
+import pandas as pd
+
+print(levy_stable.pdf(30,1.2,0.5))
+
+S0 = 100.0  # initial index level
+K = 95.0  # strike level
+T = 1.0  # call option maturity
+r = 0.05  # constant short rate
+sigma = 0.2  # constant volatility of diffusion
+lmbda = 1.0  # jump frequency p.a.
+mu = -0.1  # expected jump size
+delta = 0.05  # jump size volatility
+
+k = math.log(K / S0)
+x0 = math.log(S0/S0)
+g = 4  # factor to increase accuracy
+N = g * 2048
+eps = (g * 150.0) ** -1
+eta = 2 * math.pi / (N * eps)
+b = 0.5 * N * eps - k
+u = np.arange(1, N + 1, 1)
+vj = eta * (u - 1)
+
+# Modificatons to Ensure Integrability
+if S0 >= k:  # ITM case
+    alpha = 1.5
+    v = vj - (alpha + 1) * 1j
+    print(v)
+    modCF = math.exp(-r * T) * levy_stable.cdf(34,1.8,0.16) / (alpha ** 2 + alpha - vj ** 2 + 1j * (2 * alpha + 1) * vj)
+    print(modCF)
+else:  # OTM case - this has 2 modified characteristic functions since is can be dampened twice due to its symmetry, 
+       # these are weighted later on
+    alpha = 1.5
+    v = (vj - 1j * alpha) - 1j
+    modCF1 = math.exp(-r * T) * (1 / (1 + 1j * (vj - 1j * alpha))
+           - math.exp(r * T) /(1j * (vj - 1j * alpha))- 
+             levy_stable.pdf(v,1.8,0.5)/
+             ((vj - 1j * alpha) ** 2 - 1j * (vj - 1j * alpha)))
+
+    v = (vj + 1j * alpha) - 1j
+    modCF2 = math.exp(-r * T) * (1 / (1 + 1j * (vj + 1j * alpha)) -
+             math.exp(r * T) /(1j * (vj + 1j * alpha))- 
+             levy_stable.pdf(v,1.8,0.5)/ 
+             ((vj + 1j * alpha) ** 2 - 1j * (vj + 1j * alpha)))
+    print(modCF)

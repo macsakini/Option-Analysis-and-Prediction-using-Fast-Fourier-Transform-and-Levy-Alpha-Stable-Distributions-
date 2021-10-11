@@ -1,0 +1,177 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Density (I reparametrize it to remove the constraints 
+# on the parameters)
+library(fBasics)
+library(stabledist)
+library(Quandl)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(data.table)
+```
+
+```{r}
+data <- read.csv("hs.csv")
+```
+
+```{r}
+#MARKET MODEL
+
+avg_returns <- mean(data$LogMethod)
+std_volatility <- sd(data$LogMethod)
+
+annualized_returns <- avg_returns/sqrt(365)
+annualized_volatility <- std_volatility/sqrt(365)
+
+cat(avg_returns,"\n", std_volatility,"\n", annualized_returns,"\n",annualized_volatility)
+```
+
+```{r}
+#CAPM Model
+library(stargazer)
+
+capm <- lm(data$LogMethod ~ data$DJIAReturns)
+
+summary(capm)
+
+plot(data$LogMethod, data$DJIAReturns,main="Linear Regression of DJIA and PFE", xlab="PFE returns", ylab="DJIA returns")
+
+abline(capm)
+
+stargazer(capm, type="latex")
+```
+```{r}
+checkresiduals(capm)
+```
+
+```{r}
+# Sample data
+x <- na.omit(data$LogMethod)
+x
+
+```
+```{r}
+f <- function(u,a,b,c,d) {
+  cat(a,b,c,d,"\n")  # Some logging (it is very slow)
+  dstable(u, 2*exp(a)/(1+exp(a)), 2*exp(b)/(1+exp(b))-1, exp(c), d)
+}
+
+# Fit the distribution
+library(MASS)
+r <- fitdistr(x, f, list(a=1, b=0, c=log(mad(x)), d=median(x)))
+
+```
+
+
+```{r}
+# Graphical check
+plot(
+  qstable(ppoints(126),
+    2*exp(r$estimate[1])/(1+exp(r$estimate[1])),
+    2*exp(r$estimate[2])/(1+exp(r$estimate[2]))-1,
+    exp(r$estimate[3]),
+    r$estimate[4]
+  ),
+  sort(x)
+)
+abline(0,1)
+```
+```{r}
+print(r$vcov)
+print(r$loglik)
+print(r$estimate)
+print(r$sd)
+```
+```{r}
+fit <- stableFit(x,alpha=1.75,beta=0,gamma=1,delta=0,type=c("mle"),
+      doplot=TRUE)
+```
+```{r}
+fit
+```
+
+
+```{r}
+BlackScholes <- function(S, K, r, T, sig, type){
+  #S stock price
+  #K exercise price
+  #r risk free rate
+  #sig Sigma volatility of stock
+  #T time to expiration of option
+  #Type C is Call Type P is Put
+  if(type=="C"){
+  d1 <- (log(S/K) + (r + sig^2/2)*T) / (sig*sqrt(T))
+  d2 <- d1 - sig*sqrt(T)
+  
+  value <- S*pnorm(d1) - K*exp(-r*T)*pnorm(d2)
+  return(value)}
+  
+  if(type=="P"){
+  d1 <- (log(S/K) + (r + sig^2/2)*T) / (sig*sqrt(T))
+  d2 <- d1 - sig*sqrt(T)
+  
+  value <-  (K*exp(-r*T)*pnorm(-d2) - S*pnorm(-d1))
+  return(value)}
+}
+```
+
+```{r}
+call <- BlackScholes(110,100,0.04,1,0.2,"C")
+put <- BlackScholes(110,100,0.04,1,0.2,"P")
+```
+
+```{r}
+data %>% 
+  filter(if_all(everything(), ~ !is.na(.x)))
+Standard_deviation <- sd(data$LogMethod)
+```
+```{r}
+annual_sigma <- Standard_deviation * sqrt(250)
+annual_sigma
+```
+
+```{r}
+# The variable CallValueperSigma would store all the option prices that are 
+# calculated with the different values of sigma along the sigma vector. 
+
+CallValueperSigma <- BlackScholes(148,148,0.09,0.5,0.19,"C")
+
+# IV is the the min value of the difference between each value of the  #CallValueperSigma  vector and the call price. 
+
+IV <- which.min(abs(CallValueperSigma-C))/2 
+
+#The “which” command would return the index of the value in the sigma vector that #correspond to the option price derived from the BlackScholes  function  that is #nearest respect  the call market price. 
+#This value is divided by two in order to get the specific Implied Volatility value from the sigma vector, because sigma starts from 0 to 0.5.
+```
+
+```{r}
+CallValueperSigma
+IV
+```
+```{r}
+#load package
+library(fitdistrplus)
+#fit our dataset to a gamma distribution using mle
+
+ygamma <- fitdist(data$PFE, distr = "norm", method = "mle")
+#view the summary of the fit 
+plot(ygamma)
+```
+
+```{r}
+library(qrmtools)
+
+results <- function(start, stock, riskfree, vol, strike, expire){
+  print(Black_Scholes(start, stock, riskfree, vol, strike, expire, "call"))
+}
+
+for (i in c(32:42)){
+  results(0, 44, 0.09, 0.19, i, 180/365)
+}
+```
+

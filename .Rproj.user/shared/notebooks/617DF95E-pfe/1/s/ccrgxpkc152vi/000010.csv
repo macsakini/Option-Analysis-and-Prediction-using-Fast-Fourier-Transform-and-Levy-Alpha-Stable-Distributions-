@@ -1,0 +1,13 @@
+"0","# Graphical check"
+"0","plot("
+"0","  qstable(ppoints(126),"
+"0","    2*exp(r$estimate[1])/(1+exp(r$estimate[1])),"
+"0","    2*exp(r$estimate[2])/(1+exp(r$estimate[2]))-1,"
+"0","    exp(r$estimate[3]),"
+"0","    r$estimate[4]"
+"0","  ),"
+"0","  sort(r)"
+"0",")"
+"2","Error in h(simpleError(msg, call)) : 
+  error in evaluating the argument 'x' in selecting a method for function 'plot': $ operator is invalid for atomic vectors
+"

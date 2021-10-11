@@ -1,0 +1,61 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Density (I reparametrize it to remove the constraints 
+# on the parameters)
+library(fBasics)
+library(stabledist)
+```
+
+
+```{r}
+# Sample data
+y <- na.omit(data$DJIAReturns)
+y
+
+```
+```{r}
+f <- function(u,a,b,c,d) {
+  cat(a,b,c,d,"\n")  # Some logging (it is very slow)
+  dstable(u, 2*exp(a)/(1+exp(a)), 2*exp(b)/(1+exp(b))-1, exp(c), d)
+}
+
+# Fit the distribution
+library(MASS)
+p <- fitdistr(x, f, list(a=1, b=0, c=log(mad(x)), d=median(x)))
+```
+
+
+```{r}
+# Graphical check
+plot(
+  qstable(ppoints(125),
+    2*exp(r$estimate[1])/(1+exp(r$estimate[1])),
+    2*exp(r$estimate[2])/(1+exp(r$estimate[2]))-1,
+    exp(r$estimate[3]),
+    r$estimate[4]
+  ),
+  sort(y)
+)
+abline(0,1)
+```
+```{r}
+print(p$vcov)
+print(p$loglik)
+print(p$estimate)
+print(p$sd)
+```
+
+```{r}
+stableFit(y,alpha=1.75,beta=0,gamma=1,delta=0,type=c("mle"),
+      doplot=TRUE)
+```
+

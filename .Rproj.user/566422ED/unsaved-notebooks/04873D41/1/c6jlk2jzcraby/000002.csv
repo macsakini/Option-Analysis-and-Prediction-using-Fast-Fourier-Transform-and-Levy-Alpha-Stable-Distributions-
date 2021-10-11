@@ -1,0 +1,6 @@
+"0","library(forecast)
+"
+"2","Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+"
