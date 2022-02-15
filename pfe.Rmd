@@ -18,9 +18,23 @@ library(data.table)
 ```{r}
 data <- read.csv("hs.csv")
 ```
-
+Performing EDA on the dataset
 ```{r}
-#MARKET MODEL
+summary(data)
+```
+```{r}
+data <- data %>%
+  na.omit()
+```
+Plotting the PFEReturns and DJIAReturns against time
+```{r}
+ggplot(data, aes(x = DJIAReturns, y = LogMethod)) +
+  geom_point()
+```
+
+
+Implemeting the market model to vizualize the HS security.
+```{r}
 
 avg_returns <- mean(data$LogMethod)
 std_volatility <- sd(data$LogMethod)
@@ -28,7 +42,8 @@ std_volatility <- sd(data$LogMethod)
 annualized_returns <- avg_returns/sqrt(365)
 annualized_volatility <- std_volatility/sqrt(365)
 
-cat(avg_returns,"\n", std_volatility,"\n", annualized_returns,"\n",annualized_volatility)
+print(annualized_returns)
+print(annualized_volatility)
 ```
 
 ```{r}
@@ -43,11 +58,14 @@ plot(data$LogMethod, data$DJIAReturns,main="Linear Regression of DJIA and PFE", 
 
 abline(capm)
 
-stargazer(capm, type="latex")
+# stargazer(capm, type="latex")
 ```
 ```{r}
 checkresiduals(capm)
 ```
+
+
+Fitting the stabledist
 
 ```{r}
 # Sample data
@@ -63,6 +81,7 @@ f <- function(u,a,b,c,d) {
 
 # Fit the distribution
 library(MASS)
+
 r <- fitdistr(x, f, list(a=1, b=0, c=log(mad(x)), d=median(x)))
 
 ```
@@ -76,8 +95,8 @@ plot(
     2*exp(r$estimate[2])/(1+exp(r$estimate[2]))-1,
     exp(r$estimate[3]),
     r$estimate[4]
-  ),
-  sort(x)
+  )# ),
+  # sort(x)
 )
 abline(0,1)
 ```
