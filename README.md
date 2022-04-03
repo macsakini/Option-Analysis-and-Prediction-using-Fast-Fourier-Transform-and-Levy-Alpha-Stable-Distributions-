@@ -23,6 +23,7 @@ CAPM Model
 
 ![image](https://user-images.githubusercontent.com/47692036/161439035-9ef01336-eb45-4971-af29-384e66f15573.png)
 CAPM Statistics.
+
 3. Technical analysis incorporates normal distributions.
 
 4. Beta Coefficient explains risk in a regression model of market prices with underlying asset.
