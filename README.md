@@ -21,7 +21,7 @@ However the following concept can be critical to understand.
 ![image](https://user-images.githubusercontent.com/47692036/161438930-7d658922-079a-4a16-8634-f748ea50e9df.png)
 CAPM Model
 
-![image](https://user-images.githubusercontent.com/47692036/161439035-9ef01336-eb45-4971-af29-384e66f15573.png)
+![image](https://user-images.githubusercontent.com/47692036/161439138-7113aa33-956a-4487-986c-7cec260c84f5.png)
 CAPM Statistics.
 
 3. Technical analysis incorporates normal distributions.
