@@ -20,7 +20,7 @@ However the following concept can be critical to understand.
 2. Volatility in stock markets and securities are regularly functions of normal distributions according to a number of models. 
 
 ![image](https://user-images.githubusercontent.com/47692036/161438930-7d658922-079a-4a16-8634-f748ea50e9df.png)
-Figure 1.1CAPM Model
+Figure 1.1 CAPM Model
 
 3. Technical analysis incorporates normal distributions.
 
