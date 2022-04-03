@@ -22,7 +22,7 @@ However the following concept can be critical to understand.
 ![image](https://user-images.githubusercontent.com/47692036/161438930-7d658922-079a-4a16-8634-f748ea50e9df.png)
 Figure 1.1 CAPM Model
 
-3. Technical analysis incorporates normal distributions.
+3. Technical analysis incorporates normal distributions. This can also be seen in the thrid graph in the image above. The residuals are trying to get fit under a normal curve.
 
 4. Beta Coefficient explains risk in a regression model of market prices with underlying asset.
 
