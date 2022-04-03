@@ -40,3 +40,15 @@ __Although the probability density function for a general stable distribution ca
 Having understoodm these ten simple facts. You already have a mind map of the whole paper. 
 
 Instead of using normal use levy, but since levy does not have pdf, use fast fourier to find it. Fit the residuals of the market using the levy. Find the shape and scale parameters. Also the alpha and beta.
+
+# The files
+ - DJIA - Dow Jones
+ - PF - Pfizer
+ - fft - Fast Fourier Transform
+djia.rmd is an R file making analysis on the Down Jones index for stated period.
+pfe.rmd - analysis on pfizer stock for stated period.
+fft.py - is the fast fourier transform implemented.
+levystable.py -  is the levy stable distribution inside __scipy__ library.
+hs.csv is a combined data file having side by side stocks of dow jones and pfizer.
+pfe.csv has only pfizer historical prices
+
