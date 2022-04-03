@@ -18,7 +18,11 @@ However the following concept can be critical to understand.
 1. Options are regularly proced using the BS model.
 
 2. Volatility in stock markets and securities are regularly functions of normal distributions according to a number of models. 
+![image](https://user-images.githubusercontent.com/47692036/161438930-7d658922-079a-4a16-8634-f748ea50e9df.png)
+CAPM Model
 
+![image](https://user-images.githubusercontent.com/47692036/161439035-9ef01336-eb45-4971-af29-384e66f15573.png)
+CAPM Statistics.
 3. Technical analysis incorporates normal distributions.
 
 4. Beta Coefficient explains risk in a regression model of market prices with underlying asset.
@@ -40,6 +44,8 @@ __Although the probability density function for a general stable distribution ca
 Having understoodm these ten simple facts. You already have a mind map of the whole paper. 
 
 Instead of using normal use levy, but since levy does not have pdf, use fast fourier to find it. Fit the residuals of the market using the levy. Find the shape and scale parameters. Also the alpha and beta.
+![image](https://user-images.githubusercontent.com/47692036/161438872-1ab6ac8a-5684-4f11-801c-9321dfdf7de9.png)
+Figure 1.1 Dow Jones Levy Alpha Distribution
 
 # The files
  - DJIA - Dow Jones
@@ -51,4 +57,10 @@ fft.py - is the fast fourier transform implemented.
 levystable.py -  is the levy stable distribution inside __scipy__ library.
 hs.csv is a combined data file having side by side stocks of dow jones and pfizer.
 pfe.csv has only pfizer historical prices
+
+![image](https://user-images.githubusercontent.com/47692036/161438964-376587d3-d0e3-460f-815f-174ec2993158.png)
+Predictions made using regular BS model.
+
+![image](https://user-images.githubusercontent.com/47692036/161438984-9dd0e583-3b5d-4d0c-b91f-3a301b55fd8f.png)
+Predictions made using levy alpha. 
 
